@@ -1,0 +1,103 @@
+<p id="notice"><%= notice %></p>
+
+<%= render 'clients/client_matter_search' %>
+
+<p>
+  <b>Name:</b>
+  <%= @matter.client.name %> - <%= @matter.name %>
+</p>
+
+<div id="matter_tabs">
+  <ul class="navigation">
+    <li<%= raw ' class="active"' if @tab == 'general' %>><%= link_to 'General', :tab => 'general' %></li>
+    <li<%= raw ' class="active"' if @tab == 'contact' %>><%= link_to 'Contact', :tab => 'contact' %></li>
+    <li<%= raw ' class="active"' if @tab == 'calendar' %>><%= link_to 'Calendar', :tab => 'calendar' %></li>
+    <li<%= raw ' class="active"' if @tab == 'assignments' %>><%= link_to 'Assignments', :tab => 'assignments' %></li>
+    <li<%= raw ' class="active"' if @tab == 'status' %>><%= link_to 'Status', :tab => 'status' %></li>
+    <li<%= raw ' class="active"' if @tab == 'client' %>><%= link_to 'Client', :tab => 'client' %></li>
+    <li<%= raw ' class="active"' if @tab == 'relationships' %>><%= link_to 'Relationships', :tab => 'relationships' %></li>
+    <li<%= raw ' class="active"' if @tab == 'notes' %>><%= link_to 'Notes', :tab => 'notes' %></li>
+  </ul>
+</div>
+
+<%= semantic_form_for [current_firm, current_client, @matter] do |form| %>
+  <%= form.inputs do %>
+    <% if @tab == 'general' %>
+      <%= form.input :name, :input_html => { :maxlength => 255 } %>
+      <%= form.input :status, :as => :select, :collection => Matter.statuses.keys, :include_blank => false %>
+      <%= form.input :public_status, :as => :select, :collection => Matter.public_statuses.keys, :include_blank => false %>
+      <%= form.input :rate, :collection => current_firm.rates, :include_blank => false %>
+      <%= form.input :allow_task_rate %>
+      <%= form.input :responsible_user, :label => 'Responsible Professional' %>
+      <%= form.input :billable %>
+      <%= form.input :purchase_order_no, :input_html => { :maxlength => 50 } %>
+      <%= form.input :payment_term, :include_blank => false %>
+      <%= form.input :payment_term_text, :as => :text, :input_html => { :rows => 2 } %>
+      <%= form.input :start_date, :as => :date %>
+      <%= form.input :end_date, :as => :date, :label => 'Estimated End Date' %>
+    <% elsif @tab == 'contact' %>
+      <table>
+        <tr>
+          <td width="50%">
+            <h2>Main Contact</h2>
+            <%= render 'shared/contact_form', :form => form, :contact_attr => :main_contact %>
+          </td>
+          <td width="50%">
+            <h2>Billing Contact</h2>
+            <%= render 'shared/contact_form', :form => form, :contact_attr => :billing_contact %>
+          </td>
+        </tr>
+      </table>  
+    <% elsif @tab == 'calendar' %>
+      <h2>Under Construction</h2>
+    <% elsif @tab == 'assignments' %>
+      <h2>Under Construction</h2>
+    <% elsif @tab == 'status' %>
+      <h2>Under Construction</h2>
+    <% elsif @tab == 'client' %>
+      <table>
+        <tr>
+          <th>Client</th><td><%= current_client.name %></td>
+        </tr>
+        <tr>
+          <th>Entity Type</th><td><%= current_client.entity_type %></td>
+        </tr>
+        <tr>
+          <th>Status</th><td><%= current_client.status %></td>
+        </tr>
+        <tr>
+          <th>Address One</th><td><%= current_client.main_contact.address_1 %></td>
+        </tr>
+        <tr>
+          <th>Address Two</th><td><%= current_client.main_contact.address_2 %></td>
+        </tr>
+        <tr>
+          <th>City</th><td><%= current_client.main_contact.city %></td>
+        </tr>
+        <tr>
+          <th>State</th><td><%= current_client.main_contact.state %></td>
+        </tr>
+        <tr>
+          <th>Zip Code</th><td><%= current_client.main_contact.zip_code %></td>
+        </tr>
+        <tr>
+          <th>Country</th><td><%= current_client.main_contact.country %></td>
+        </tr>
+        <tr>
+          <th>Phone</th><td><%= current_client.main_contact.phone %></td>
+        </tr>
+        <tr>
+          <th>Point of Contact</th><td><%= current_client.main_contact.first_name %> <%= current_client.main_contact.last_name %></td>
+        </tr>
+        <tr>
+          <th>Email Address</th><td><%= current_client.main_contact.email %></td>
+        </tr>
+      </table>
+    <% elsif @tab == 'relationships' %>
+      <h2>Under Construction</h2>
+    <% elsif @tab == 'notes' %>
+      <%= form.input :notes, :as => :text, :input_html => { :rows => 8 } %>
+    <% end %>
+  <% end %>
+  <%= form.actions %>
+<% end %>

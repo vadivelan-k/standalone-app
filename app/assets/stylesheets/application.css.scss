@@ -1,0 +1,72 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require lib/yui3-reset
+ *= require_self
+ 
+ *= require formtastic
+
+ *= require formtastic_ie6
+ *= require formtastic_ie7 
+
+ *= require_tree . 
+*/
+h1	{ font:bold 24px/30px 'Lato', helvetica, arial, sans-serif; }
+h2  { font:bold 21px/26px 'Lato', helvetica, arial, sans-serif; }
+h3  { font:bold 14px/16px 'Lato', helvetica, arial, sans-serif; }
+h4, h5, h6  { font:bold 14px/16px 'Lato', helvetica, arial, sans-serif; }
+
+$table_border: solid 1px black;
+table {
+  border-top: $table_border;
+  border-bottom: $table_border;
+  border-left: $table_border;
+}
+tr:nth-child(odd) { background-color:#eee; }
+th, td {
+  padding:.5em;
+  border-right: $table_border;
+}
+th { background-color:#ddd; font-weight:bold }
+
+.clearboth {
+  clear:both;
+}
+
+.navigation {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  li {
+    display: inline;
+    padding-right: 20px;
+  }
+  .active {
+    background-color: #ccc;
+    a {
+      color: #000;
+    }
+  }
+}
+#top_header {
+  padding-bottom:.5em;
+}
+#top_header, #top_header a, #top_header ul {
+  background-color: #000;
+  color: #fff;
+}
+#top_header ul {
+  float: right;
+}
+
+#breadcrumbs {
+  background-color: #eee;
+  padding:.5em 0;
+  margin-bottom:1em;
+}
+
+#firm_header {
+  background-color: #ff0;
+  padding:.5em 0;
+}

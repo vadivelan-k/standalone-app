@@ -1,0 +1,80 @@
+<%= render 'shared/menu/invoices_and_payments', :active => :invoice %>
+
+<div id="invoices_filter">
+<%= semantic_form_for :filters, :html => { :method => :get } do |form| %>
+<table>
+  <tr>
+    <td>
+      <%= radio_button_tag(:faction, 'create_draft', @faction == 'create_draft') %> Create Draft Invoices
+      <br/><%= radio_button_tag(:faction, 'create_statement', @faction == 'create_statement') %> Create Statements
+      <br/><%= radio_button_tag(:faction, 'view_draft', @faction == 'view_draft') %> View Draft Invoices
+      <br/><%= radio_button_tag(:faction, 'view_sent', @faction == 'view_sent') %> View Sent Invoices
+    </td>
+    <td>
+      <%= check_box_tag :my_matters %></br>
+      <%= select_tag :client_ids, options_from_collection_for_select(current_firm.clients, :id, :name, @selected_client_ids), :multiple => true, :prompt => '-all clients-' %>
+    </td>
+    <td>
+      <div class="action_opts create_draft">
+        <%= form.input :cd_from, :as => :date, :label => 'Entries From', :input_html => { :value => @cd_from } %>
+        <%= form.input :cd_to, :as => :date, :label => 'Through', :input_html => { :value => @cd_to } %>
+        <%= form.input :cd_date, :as => :date, :label => 'Invoice Date', :input_html => { :value => @cd_date } %>
+      </div>
+      <div class="action_opts view_draft view_sent">
+        <%= form.input :vi_from, :as => :date, :label => 'Invoice Date From', :input_html => { :value => @vi_from } %>
+        <%= form.input :vi_to, :as => :date, :label => 'Through', :input_html => { :value => @vi_to } %>
+      </div>
+      <script>
+      function sync_opts(){
+        $('#invoices_filter .action_opts').hide();
+        var sel = '#invoices_filter .'+$('#invoices_filter input:radio[name=faction]:checked').val();
+        $(sel).show();
+      }
+      sync_opts();
+      $('#invoices_filter input:radio[name=faction]').click(sync_opts);
+      </script>
+    </td>
+    <td>
+      <%= button_tag "OK" %>
+    </td>
+  </tr>
+</table>
+<% end %>
+</div>
+
+<h2>Invoices</h2>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Client</th>
+    <th>Matter</th>
+    <th>Budget</th>
+    <th>Previously Invoiced</th>
+    <th>New Invoice</th>
+    <th>View</th>
+  </tr>
+<% @invoices.each do |invoice| %>
+  <tr>
+    <td><%= invoice.created_at %></td>
+    <td><%= link_to invoice.client.name, firm_client_path(current_firm, invoice.client) %></td>
+    <td>
+      <% case invoice.matters_list.size %>
+      <% when 0 %>
+        None selected
+      <% when 1 %>
+        <%= link_to invoice.matters_list[0].name, firm_client_matter_path(current_firm, invoice.client, invoice.matters_list[0]) %>
+      <% else %>
+        <table>
+        <% invoice.matters_list.each do |matter| %>
+          <tr><td><%= link_to matter.name, firm_client_matter_path(current_firm, invoice.client, matter) %></td></tr>
+        <% end %>
+        </table>
+      <% end %>
+    </td>
+    <td>???</td>
+    <td>???</td>
+    <td><%= link_to invoice.total_amount, edit_firm_invoice_path(current_firm, invoice) %></td>
+    <td><%= link_to 'View', firm_invoice_path(current_firm, invoice) %></td>
+  </tr>
+<% end %>
+</table>

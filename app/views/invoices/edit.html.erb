@@ -1,0 +1,108 @@
+<%= semantic_form_for [current_firm, @invoice] do |form| %>
+
+
+<h2>Invoice <%= @invoice.id %></h2>
+
+<%= form.actions %>
+
+<%= link_to 'Preview', firm_invoice_path(current_firm, @invoice) %>
+
+<%= link_to 'Postpone', firm_invoice_path(current_firm, @invoice), confirm: 'Are you sure?', method: :delete %>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <td><%= form.input :tdate, :as => :date %></td>
+  </tr>
+  <tr>
+    <th>Client</th>
+    <td><%= @invoice.client.name %></td>
+  </tr>
+  <tr>
+    <th>Address</th>
+    <td>
+      <%= render 'shared/contact_form', :form => form, :contact_attr => :contact, :compact => true %>
+    </td>
+  </tr>
+  <tr>
+    <th>Additional Email Address(s)</th>
+    <td><%= form.input :additional_emails %></td>
+  </tr>
+  <tr>
+    <th>Invoice Period</th>
+    <td><%= form.input :period_start, :as => :date %> - <%= form.input :period_end, :as => :date %></td>
+  </tr>
+  <tr>
+    <th>RE:</th>
+    <td><%= form.input :subject %></td>
+  </tr>
+</table>
+
+<%= link_to 'Add New Time Entry', :controller => :time_entries, :action => :new_from_invoice, :firm_id => current_firm.id, :invoice_id => @invoice.id %>
+
+<%= link_to 'Add New Expense', :controller => :expense_entries, :action => :new_from_invoice, :firm_id => current_firm.id, :invoice_id => @invoice.id %>
+
+<% @invoice.matters_list.each do |matter| %>
+  <h2><%= matter.name %></h2>
+  <% time_entries = @invoice.time_entries.where(:matter_id => matter.id).to_a %>
+  <% if time_entries.size > 0 %>
+  <h3>Legal Services</h3>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Professional</th>
+      <th>Task</th>
+      <th>Hours</th>
+      <th>Rate</th>
+      <th>Amount</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <%= form.semantic_fields_for :time_entries, time_entries do |time_entry| %>
+    <tr>
+      <td><%= time_entry.input :tdate, :as => :date %></td>
+      <td><%= time_entry.input :user %></td>
+      <td><%= time_entry.input :task %></td>
+      <td><%= time_entry.input :duration %></td>
+      <td><%= time_entry.input :rate %></td>
+      <td><%= time_entry.input :total_amount %></td>
+      <td><%= link_to 'HOLD', :controller => :time_entries, :action => :hold, :firm_id => current_firm.id, :invoice_id => @invoice.id, :id => time_entry.object.id %></td>
+      <td><%= link_to 'DELETE', firm_time_entry_path(current_firm, time_entry.object, :ret => url_for(edit_firm_invoice_path(current_firm, @invoice))), confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+    <% end %>
+  </table>
+  <% end %>
+  <% expense_entries = @invoice.expense_entries.where(:matter_id => matter.id).to_a %>
+  <% if expense_entries.size > 0 %>
+  <h3>Expenses</h3>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Professional</th>
+      <th>Expense</th>
+      <th>Price per Unit</th>
+      <th>Quantity</th>
+      <th>Mark Up %</th>
+      <th>Amount</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <%= form.semantic_fields_for :expense_entries, expense_entries do |expense_entry| %>
+    <tr>
+      <td><%= expense_entry.input :tdate, :as => :date %></td>
+      <td><%= expense_entry.input :user %></td>
+      <td><%= expense_entry.input :expense %></td>
+      <td><%= expense_entry.input :price %></td>
+      <td><%= expense_entry.input :qty %></td>
+      <td><%= expense_entry.input :markup_perc %></td>
+      <td><%= expense_entry.input :total_amount %></td>
+      <td><%= link_to 'HOLD', :controller => :expense_entries, :action => :hold, :firm_id => current_firm.id, :invoice_id => @invoice.id, :id => expense_entry.object.id %></td>
+      <td><%= link_to 'DELETE', firm_expense_entry_path(current_firm, expense_entry.object, :ret => url_for(edit_firm_invoice_path(current_firm, @invoice))), confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+    <% end %>
+  </table>
+  <% end %>
+<% end %>
+
+
+<% end %>

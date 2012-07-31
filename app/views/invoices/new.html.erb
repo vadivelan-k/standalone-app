@@ -1,0 +1,44 @@
+<%= form_tag(firm_invoices_path(current_firm), :method => :post) do %>
+  <%= hidden_field_tag :client_id, @client.id %>
+<h3>Choose Matters</h3>
+<table>
+  <tr>
+    <th></th>
+    <th>Matter</th>
+    <th>First Unbilled</th>
+    <th>Last Unbilled</th>
+    <th>Total Amount</th>
+    <th># Entries</th>
+  </tr>
+  <tr>
+    <td><input type="checkbox" name="all_matters" value="all" checked="checked"/></td>
+    <td><i>All Matters</i></td>
+    <td><%= @all_summary[:min_tdate] %></td>
+    <td><%= @all_summary[:max_tdate] %></td>
+    <td><%= @all_summary[:sum_total] %></td>
+    <td><%= @all_summary[:ecount] %>, <%= @all_summary[:tcount] %></td>
+  </tr>
+<% @matter_summaries.each do |matter_id, summary| %>
+  <tr>
+    <td><input type="checkbox" name="matters[]" value="<%= matter_id %>" checked="checked"/></td>
+    <td><%= summary[:matter].name %></td>
+    <td><%= summary[:min_tdate] %></td>
+    <td><%= summary[:max_tdate] %></td>
+    <td><%= summary[:sum_total] %></td>
+    <td><%= summary[:ecount] %>, <%= summary[:tcount] %></td>
+  </tr>
+<% end %>
+</table>
+
+<h3>Choose Dates</h3>
+<div>
+  Start Date
+  <%= text_field_tag :period_start, @all_summary[:min_tdate].to_s %>
+  End Date
+  <%= text_field_tag :period_end, @all_summary[:max_tdate].to_s %>
+</div>
+<div>
+  <button>Create Invoice</button>
+</div>
+
+<% end %>

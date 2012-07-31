@@ -1,0 +1,87 @@
+<h2>Invoice <%= @invoice.id %></h2>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <td><%= @invoice.tdate %></td>
+  </tr>
+  <tr>
+    <th>Client</th>
+    <td><%= @invoice.client.name %></td>
+  </tr>
+  <tr>
+    <th>Address</th>
+    <td>
+      <%= @invoice.contact.first_name %> <%= @invoice.contact.last_name %><br/>
+      <%= @invoice.contact.address_1 %><br/>
+      <%= @invoice.contact.address_2 %><br/>
+      <%= @invoice.contact.city %>, <%= @invoice.contact.state %> <%= @invoice.contact.zip_code %><br/>
+      <%= @invoice.contact.phone %>
+    </td>
+  </tr>
+  <tr>
+    <th>Invoice Period</th>
+    <td><%= @invoice.period_start %> - <%= @invoice.period_end %></td>
+  </tr>
+  <tr>
+    <th>Payment Terms</th>
+    <td><%= @invoice.payment_term_text %></td>
+  </tr>
+  <tr>
+    <th>RE:</th>
+    <td>
+      <%= @invoice.subject %>
+      <% @invoice.matters_list.each do |matter| %>
+        <br/><%= matter.name %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+
+<% @invoice.matters_list.each do |matter| %>
+  <h2><%= matter.name %></h2>
+  <% time_entries = @invoice.time_entries.where(:matter_id => matter.id).to_a %>
+  <% if time_entries.size > 0 %>
+  <h3>Legal Services</h3>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Professional</th>
+      <th>Task</th>
+      <th>Hours</th>
+      <th>Rate</th>
+      <th>Amount</th>
+    </tr>
+    <% time_entries.each do |time_entry| %>
+    <tr>
+      <td><%= time_entry.tdate %></td>
+      <td><%= time_entry.user.full_name %></td>
+      <td><%= time_entry.task.name %></td>
+      <td><%= time_entry.duration %></td>
+      <td><%= time_entry.rate %></td>
+      <td><%= time_entry.total_amount %></td>
+    </tr>
+    <% end %>
+  </table>
+  <% end %>
+  <% expense_entries = @invoice.expense_entries.where(:matter_id => matter.id).to_a %>
+  <% if expense_entries.size > 0 %>
+  <h3>Expenses</h3>
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Professional</th>
+      <th>Expense</th>
+      <th>Amount</th>
+    </tr>
+    <% expense_entries.each do |expense_entry| %>
+    <tr>
+      <td><%= expense_entry.tdate %></td>
+      <td><%= expense_entry.user.full_name %></td>
+      <td><%= expense_entry.expense.name %></td>
+      <td><%= expense_entry.total_amount %></td>
+    </tr>
+    <% end %>
+  </table>
+  <% end %>
+<% end %>

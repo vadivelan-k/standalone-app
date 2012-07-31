@@ -1,0 +1,17 @@
+<% compact = false unless local_assigns.has_key? :compact %>
+<%= form.semantic_fields_for contact_attr do |contact| %>
+  <%= contact.input :first_name, :input_html => { :maxlength => 100 } %>
+  <%= contact.input :last_name, :input_html => { :maxlength => 100 } %>
+  <%= contact.input :address_1, :input_html => { :maxlength => 100 } %>
+  <%= contact.input :address_2, :input_html => { :maxlength => 100 } %>
+  <%= contact.input :city, :input_html => { :maxlength => 100 } %>
+  <%= contact.input :state, :as => :select, :collection => Contact.states.keys, :include_blank => true %>
+  <%= contact.input :province, :input_html => { :maxlength => 100 } %>
+  <%= contact.input :zip_code, :input_html => { :maxlength => 10 } %>
+  <%= contact.input :country, :as => :select, :collection => Contact.countries.keys, :include_blank => true %>
+  <%= contact.input :email, :input_html => { :maxlength => 100 } %>
+  <%= contact.input :phone, :input_html => { :maxlength => 100 } unless compact %>
+  <%= contact.input :fax, :input_html => { :maxlength => 100 } unless compact %>
+  <%= contact.input :mobile, :input_html => { :maxlength => 100 } unless compact %>
+  <%= contact.input :pager, :input_html => { :maxlength => 100 } unless compact %>
+<% end %>

@@ -1,0 +1,10 @@
+<%= semantic_form_for [current_firm, current_client, @matter] do |form| %>
+<table>
+  <tr>
+    <td colspan="2"><%= form.input :name %></td>
+  </tr>
+  <tr>
+    <td>Opening Balance</td><td><%= form.actions %></td>
+  </tr>
+</table>
+<% end %>

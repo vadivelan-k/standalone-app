@@ -1,0 +1,117 @@
+<%= render 'shared/menu/time_and_expenses', :active => :time %>
+
+<div class="form_style_compact entry_form">
+<%= semantic_form_for [current_firm, @time_entry] do |form| %>
+<table>
+  <tr>
+    <td>
+      <%= form.input :user, :member_value => :id, :member_name => :full_name, :label => 'Time Entry for' %>
+    </td>
+    <td>
+      <%= form.input :matter, :member_value => :id, :member_name => :full_name, :collection => current_firm.all_client_matters, :label => 'Client & Matter' %>
+      <table>
+        <tr>
+          <td>
+            <%= form.input :tstart, :hint => 'hh:mm', :input_html => { :maxlength => 5, :size => 5 }, :label => 'Start' %>
+          </td>
+          <td>
+            <%= form.input :tend, :hint => 'hh:mm', :input_html => { :maxlength => 5, :size => 5 }, :label => 'Stop' %>
+          </td>
+          <td>
+            <%= form.input :duration, :hint => 'minutes', :input_html => { :maxlength => 5, :size => 3 }, :required => false %>
+          </td>
+          <td>
+            <%= form.input :rate, :input_html => { :maxlength => 9, :size => 3 }, :required => false, :label => 'Rate/hr' %>
+          </td>
+          <td>
+            <%= form.input :fixed_fee_amount, :input_html => { :maxlength => 9, :size => 4 }, :required => false %>
+          </td>
+          <td>
+            ??? Save as timer
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= form.input :tdate %>
+    </td>
+    <td>
+      <table>
+        <tr>
+          <td>
+            <%= form.input :task %>
+            <%= form.input :notes, :as => :text, :input_html => { :rows => 3 }, :required => false %>
+          </td>
+          <td>
+            <%= form.actions %>
+            <br/>
+            <%= link_to 'Cancel', firm_time_entries_path(current_firm) %>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<% end %>
+</div>
+
+<hr noshade size="1">
+
+<table>
+  <tr>
+    <td>
+      View
+      <select>
+        <option>Today Only</option>
+      </select>
+      Unbilled
+      Billed
+      All
+      All Professionals
+    </td>
+    <td>
+      <div>
+        Entries for <input type="text"> Through <input type="text"> <button>Show</button>
+        <a href="">Weekly View</a>
+        <a href="">Monthly View</a>
+        <a href="">View Report</a>
+      </div>
+      <div>
+        Client-Matter <select><option>all Client-Matter</option></select>
+      </div>
+      
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Professional</th>
+          <th>Client-Matter</th>
+          <th>Task</th>
+          <th>Start</th>
+          <th>Stop Total:</th>
+          <th>Duration</th>
+          <th>Rate Total:</th>
+          <th>Total:</th>
+          <th>Invoice</th>
+          <th></th>
+        </tr>
+      <% @time_entries.each do |time_entry| %>
+        <tr>
+          <td><%= time_entry.tdate %></td>
+          <td><%= time_entry.user.full_name %></td>
+          <td><%= time_entry.matter.name %></td>
+          <td><%= time_entry.task.name %></td>
+          <td>??? <%= time_entry.tstart %></td>
+          <td>??? <%= time_entry.tend %></td>
+          <td><%= time_entry.duration %></td>
+          <td>??? <%= time_entry.rate %></td>
+          <td>??? <%= time_entry.fixed_fee_amount %></td>
+          <td><%= link_to time_entry.invoice_id, firm_invoice_path(current_firm, time_entry.invoice_id) unless time_entry.invoice_id.nil? %></td>
+          <td><%= link_to 'Edit', edit_firm_time_entry_path(current_firm, time_entry) %></td>
+        </tr>
+      <% end %>
+      </table>
+    </td>
+  </tr>
+</table>

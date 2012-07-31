@@ -1,0 +1,115 @@
+<%= render 'shared/menu/invoices_and_payments', :active => :payment %>
+
+<div class="form_style_compact entry_form">
+<%= semantic_form_for [current_firm, @payment] do |form| %>
+<table>
+  <tr>
+    <td>
+      <%= form.input :tdate, :as => :date, :label => 'Date' %>
+    </td>
+    <td>
+      <%= form.input :matter, :member_value => :id, :member_name => :full_name, :collection => current_firm.all_client_matters, :label => 'Client & Matter' %>
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td>
+      <%= form.input :credit_type, :as => :select, :collection => Payment.credit_types.keys, :include_blank => false %>
+    </td>
+    <td>
+      <%= form.input :payment_method, :as => :select, :collection => Payment.payment_methods.keys, :include_blank => false %>
+    </td>
+    <td>
+      <%= form.input :reference %>
+    </td>
+    <td>
+      <%= form.input :amount %>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <td>
+      <%= form.input :notes %>
+    </td>
+    <td>
+      <%= form.actions %>
+    </td>
+  </tr>
+</table>
+<% end %>
+</div>
+
+<hr noshade size="1">
+
+<table>
+  <tr>
+    <td>
+      <h3>View</h3>
+      <select>
+        <option>Last 7 Days</option>
+        <option>Last 30 Days</option>
+        <option>Last 60 Days</option>
+        <option>Last 90 Days</option>
+        <option>Last 120 Days</option>
+        <option>Today Only</option>
+        <option>Other</option>
+      </select>
+      <br/><input type="radio"> Allocatable
+      <br/><input type="radio"> Unallocated
+      <br/><input type="radio"> Allocated
+      <br/><input type="radio"> All
+      <br/><select>
+        <option>all Credit Types</option>
+        <option>Payment</option>
+        <option>Credit Memo</option>
+        <option>Write Off</option>
+      </select>
+      <br/><select>
+        <% Payment.payment_methods.keys.each do |key| %>
+        <option><%= key %></option>
+        <% end %>
+      </select>
+      <br/><input type="checkbox"> Show all for client
+    </td>
+    <td>
+      <div>
+        Entries for <input type="text"> Through <input type="text"> <button>Show</button>
+      </div>
+      <div>
+        Client-Matter <select><option>all Client-Matter</option></select>
+      </div>
+      
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Client-Matter</th>
+          <th>Credit Type</th>
+          <th>Payment Method</th>
+          <th>Reference</th>
+          <th>Amount</th>
+          <th>Invoice #</th>
+          <th>Available Funds</th>
+          <th>Allocate</th>
+          <th>Void</th>
+        </tr>
+      <% @payments.each do |payment| %>
+        <tr>
+          <td><%= payment.tdate %></td>
+          <td><%= payment.matter.name %></td>
+          <td><%= payment.credit_type %></td>
+          <td><%= payment.payment_method %></td>
+          <td><%= payment.reference %></td>
+          <td><%= payment.amount %></td>
+          <td>??? DETAIL LINK</td>
+          <td><%= payment.balance %></td>
+          <td><%= link_to 'Allocate', firm_payment_path(current_firm, payment) %></td>
+          <td><%= link_to 'Void', firm_payment_path(current_firm, payment), confirm: 'Are you sure?', method: :delete %></td>
+        </tr>
+      <% end %>
+      </table>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,13 @@
+<p>This is logged in user's homepage</p>
+
+<% if @firms.size == 0 %>
+  <p>You do not belong to any firm</p>
+<% else %>
+  <p>You belong to the following <%= pluralize(@firms.size, 'firm') %>:</p>
+  <ul>
+  <% @firms.each do |firm| %>
+    <li><%= link_to(firm.name, firm ) %></li>
+  <% end %>
+  </ul>
+<% end %>
+<p>To create a new firm, <%= link_to('click here', new_firm_path ) %>.</p>

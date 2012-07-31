@@ -1,0 +1,7 @@
+<div id="top_tabs">
+  <ul class="navigation">
+    <li<%= raw ' class="active"' if active == :invoice %>><%= link_to 'Invoices', firm_invoices_path(current_firm) %></li>
+    <li<%= raw ' class="active"' if active == :payment %>><%= link_to 'Payments', firm_payments_path(current_firm) %></li>
+    <li<%= raw ' class="active"' if active == :trust %>>Trust</li>
+  </ul>
+</div>

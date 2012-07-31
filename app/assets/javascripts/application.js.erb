@@ -1,0 +1,32 @@
+// This is a manifest file that'll be compiled into including all the files listed below.
+// Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
+// be included in the compiled file accessible from http://example.com/assets/application.js
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// the compiled file.
+//
+//= require jquery
+//= require jquery-ui
+//= require jquery_ujs
+//= require_tree .
+
+// formtastic date picker
+$(document).ready(function(){
+  $("input.ui-date-picker").datepicker({
+     showOn: 'button',
+     buttonImage: '<%= asset_path 'calendar.gif' %>',
+     buttonImageOnly: true,
+     changeMonth: true,
+     changeYear: true,
+     showAnim: 'slideDown',
+     duration: 'fast'
+  });
+});
+// fix default selected value in multiple select.  e.g. the clients multiple select box in view draft invoices
+$(document).ready(function(){
+  $("select[multiple=multiple]").each(function(i){
+    var v = $(this).val();
+    if (!v || (v.length == 1 && v[0] == "")) {
+      $(this).val([""]);
+    }
+  });
+});

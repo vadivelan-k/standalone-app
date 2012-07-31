@@ -1,0 +1,42 @@
+<table>
+  <tr>
+    <td>
+      <h2>Enter Your New Clients</h2>
+      <%= semantic_form_for [current_firm, @client] do |form| %>
+      <table>
+        <tr>
+          <td colspan="2"><%= form.input :name %></td>
+        </tr>
+        <tr>
+          <td><%= form.input :open_date, :as => :date %></td><td><%= form.actions %></td>
+        </tr>
+      </table>
+      <% end %>
+    </td>
+    <td>
+      <h2>Enter Your New Matters</h2>
+      <li class="select input optional" id="matter_client_input">
+        <label class=" label" for="c_matter_client_id">Client</label>
+        <%= collection_select(:c, :matter_client_id, current_firm.clients.active, :id, :name, :prompt => '-select client-') %>
+        <div id="new_matter_form_div"></div>
+        <script>
+        $('#c_matter_client_id').change(function(){
+          if ($(this).val()) {
+            $.ajax({
+              url: '/firms/<%= current_firm.id %>/clients/' + $(this).val() + '/new_matters_form',
+              cache: false,
+              dataType: 'html',
+              type: 'GET',
+              success: function(data, textStatus, xhr) {
+                $('#new_matter_form_div').html(data);
+              }
+            });
+          } else {
+            $('#new_matter_form_div').html('');
+          }
+        });
+        </script>
+      </li>
+    </td>
+  </tr>
+</table>

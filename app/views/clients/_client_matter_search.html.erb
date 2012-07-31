@@ -1,0 +1,44 @@
+<table>
+  <tr>
+    <td>
+      <%= form_for(:cmfilter, :url => { :controller => :clients, :action => :index }, :html => { :method => :get } ) do |f| %>
+      <table>
+        <tr>
+          <td valign="bottom" align="left">
+            Search<br/>
+            <%= select_tag("cmfilter[status]", options_for_select(Client.statuses.keys, @filter_status), :include_blank => true) %>
+          </td>
+          <td valign="bottom" align="right">
+            <input type="checkbox"> Bulk Edit Mode
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <table>
+              <tr>
+                <td valign="bottom">
+                  Client name includes:<br/>
+                  <%= f.text_field :cname, :value => @filter_cname %>
+                </td>
+                <td valign="bottom">
+                  And/Or
+                </td>
+                <td valign="bottom">
+                  Matter name includes:<br/>
+                  <%= f.text_field :mname, :value => @filter_mname %>
+                </td>
+                <td valign="bottom">
+                  <button>View</button>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <% end %>
+    </td>
+    <td>
+      <%= link_to 'Client & Matter Creation', new_firm_client_path(current_firm) %>
+    </td>
+  </tr>
+</table>

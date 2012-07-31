@@ -1,0 +1,15 @@
+<%= semantic_form_for [current_firm, @time_entry] do |form| %>
+  <%= form.input :invoice_id, :as => :hidden %>
+  <%= form.input :user, :member_value => :id, :member_name => :full_name, :label => 'Time Entry for' %>
+  <%= form.input :matter, :member_value => :id, :member_name => :full_name, :collection => @invoice.client.matters, :label => 'Client & Matter' %>
+  <%= form.input :tstart, :hint => 'hh:mm', :input_html => { :maxlength => 5, :size => 5 }, :label => 'Start' %>
+  <%= form.input :tend, :hint => 'hh:mm', :input_html => { :maxlength => 5, :size => 5 }, :label => 'Stop' %>
+  <%= form.input :duration, :hint => 'minutes', :input_html => { :maxlength => 5, :size => 3 }, :required => false %>
+  <%= form.input :rate, :input_html => { :maxlength => 9, :size => 3 }, :required => false, :label => 'Rate/hr' %>
+  <%= form.input :fixed_fee_amount, :input_html => { :maxlength => 9, :size => 4 }, :required => false %>
+  <%= form.input :tdate %>
+  <%= form.input :task %>
+  <%= form.input :notes, :as => :text, :input_html => { :rows => 3 }, :required => false %>
+  <%= form.actions %>
+  <%= link_to 'Cancel', edit_firm_invoice_path(current_firm, @invoice) %>
+<% end %>

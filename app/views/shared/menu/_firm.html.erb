@@ -1,0 +1,17 @@
+<div id="firm_header">
+  <ul class="navigation">
+    <li><%= current_firm.name %> &gt;&gt;</liv>
+    <li>Matter Calendar Conflicts &amp; Contacts</li>
+    <li><%= link_to 'Clients & Matters', firm_clients_path(current_firm) %></li>
+    <li><%= link_to 'Time & Expenses', firm_time_entries_path(current_firm) %></li>
+    <li><%= link_to 'Invoices & Payments', firm_invoices_path(current_firm) %></li>
+    <li>Reports</li>
+<!--
+    <li><%= link_to 'Time Entry', firm_time_entries_path(current_firm) %></li>
+    <li><%= link_to 'Expense Entry', firm_expense_entries_path(current_firm) %></li>
+    <li><%= link_to 'Invoices', firm_invoices_path(current_firm) %></li>
+    <li><%= link_to 'Clients', firm_clients_path(current_firm) %></li>
+    <li><%= link_to 'Edit firm', edit_firm_path(current_firm) %></li>
+-->
+  </ul>
+</div>

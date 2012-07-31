@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<%= render 'clients/client_matter_search' %>
+
+<p>
+  <b>Name:</b>
+  <%= @client.name %>
+</p>
+
+<div id="client_tabs">
+  <ul class="navigation">
+    <li<%= raw ' class="active"' if @tab == 'general' %>><%= link_to 'General', :tab => 'general' %></li>
+    <li<%= raw ' class="active"' if @tab == 'contact' %>><%= link_to 'Contact', :tab => 'contact' %></li>
+    <li<%= raw ' class="active"' if @tab == 'terms' %>><%= link_to 'Terms', :tab => 'terms' %></li>
+    <li<%= raw ' class="active"' if @tab == 'matters' %>><%= link_to 'Matters', :tab => 'matters' %></li>
+    <li<%= raw ' class="active"' if @tab == 'relationships' %>><%= link_to 'Relationships', :tab => 'relationships' %></li>
+    <li<%= raw ' class="active"' if @tab == 'notes' %>><%= link_to 'Notes', :tab => 'notes' %></li>
+  </ul>
+</div>
+
+<%= semantic_form_for [current_firm, @client] do |form| %>
+  <%= form.inputs do %>
+    <% if @tab == 'general' %>
+      <%= form.input :name, :input_html => { :maxlength => 255 } %>
+      <%= form.input :invoice_name, :input_html => { :maxlength => 255 } %>
+      <%= form.input :status, :as => :select, :collection => Client.statuses.keys, :include_blank => false %>
+      <%= form.input :open_date, :as => :date %>
+      <%= form.input :inactive_date, :as => :date %>
+      <%= form.input :entity_type, :as => :select, :collection => Client.entity_types.keys, :include_blank => true %>
+      <%= form.input :rate, :collection => current_firm.rates, :include_blank => false %>
+      <%= form.input :taxable %>
+      <%= form.input :currency, :input_html => { :maxlength => 10 } %>
+    <% elsif @tab == 'contact' %>
+      <table>
+        <tr>
+          <td width="50%">
+            <h2>Main Contact</h2>
+            <%= render 'shared/contact_form', :form => form, :contact_attr => :main_contact %>
+          </td>
+          <td width="50%">
+            <h2>Billing Contact</h2>
+            <%= render 'shared/contact_form', :form => form, :contact_attr => :billing_contact %>
+          </td>
+        </tr>
+      </table>  
+    <% elsif @tab == 'terms' %>
+      <%= form.input :invoice_header_text, :as => :text, :input_html => { :rows => 2 } %>
+      <%= form.input :payment_term, :include_blank => false %>
+      <%= form.input :payment_term_text, :as => :text, :input_html => { :rows => 2 } %>
+      <%= form.input :interest_rate, :input_html => { :maxlength => 255 } %>
+      <%= form.input :grace_period, :input_html => { :maxlength => 255 } %>
+      <%= form.input :invoice_footer_text, :as => :text, :input_html => { :rows => 2 } %>
+      <%# = form.input :invoice_template_id %>
+      <%= form.input :consolidate_new_matters %>
+      <%= form.input :invoice_delivery_automail %>
+      <%= form.input :invoice_delivery_email %>
+      <%# = form.input :invoice_delivery_email_type %>
+      <%= form.input :invoice_delivery_printer %>
+      <%= form.input :invoice_delivery_web_bill %>
+    <% elsif @tab == 'matters' %>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Matter</th>
+          <th>Status</th>
+          <th>Responsible Professional</th>
+        </tr>
+      <% @client.matters.each do |matter| %>
+        <tr>
+          <td><%= matter.id %></td>
+          <td><%= link_to matter.name, firm_client_matter_path(current_firm, @client, matter) %></td>
+          <td><%= matter.status %></td>
+          <td><%= matter.responsible_user.name unless matter.responsible_user.nil? %></td>
+        </tr>
+      <% end %>
+      </table>
+    <% elsif @tab == 'relationships' %>
+      <h2>Under Construction</h2>
+    <% elsif @tab == 'notes' %>
+      <%= form.input :notes, :as => :text, :input_html => { :rows => 8 } %>
+    <% end %>
+  <% end %>
+  <%= form.actions %>
+<% end %>

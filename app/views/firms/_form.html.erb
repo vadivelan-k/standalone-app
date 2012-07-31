@@ -1,0 +1,12 @@
+<%= semantic_form_for @firm do |form| %>
+  <%= form.inputs do %>
+    <%= form.input :name, :input_html => { :maxlength => 255, :size => 80 } %>
+    <%= form.input :addr1, :input_html => { :maxlength => 150, :size => 80 }, :required => false %>
+    <%= form.input :addr2, :input_html => { :maxlength => 150, :size => 80 }, :required => false %>
+    <%= form.input :city, :input_html => { :maxlength => 100, :size => 80 }, :required => false %>
+    <%= form.input :state, :input_html => { :maxlength => 30, :size => 15 }, :required => false %>
+    <%= form.input :zip, :input_html => { :maxlength => 10, :size => 8 }, :required => false %>
+    <%= form.input :phone, :input_html => { :maxlength => 20, :size => 10 }, :required => false %>
+  <% end %>
+  <%= form.actions %>
+<% end %>

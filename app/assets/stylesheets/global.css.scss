@@ -1,0 +1,4 @@
+.entry_form {background-color:#ccf}
+.entry_form form table tr:nth-child(odd) {background-color:inherit}
+.entry_form form table, .entry_form form th, .entry_form form td {border:none;vertical-align:top}
+.entry_form form.formtastic .input .label {float:none;width:auto}

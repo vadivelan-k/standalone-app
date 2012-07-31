@@ -1,0 +1,41 @@
+<%= semantic_form_for [current_firm, @payment] do |form| %>
+<table>
+  <tr>
+    <td>
+      <%= form.input :reference %>
+    </td>
+    <td>
+      <%= form.input :amount %>
+    </td>
+    <td>
+      Available Funds<br/>
+      <span id="balance"><%= @payment.balance %></span>
+    </td>
+    <td>
+      <%= form.actions %>
+    </td>
+  </tr>
+</table>
+<table>
+  <tr>
+    <th>Allocate</th>
+    <th>Invoice #</th>
+    <th>Date</th>
+    <th>Matter</th>
+    <th>Amount</th>
+    <th>Balance</th>
+    <th>Payment Amount</th>
+  </tr>
+<%= form.semantic_fields_for :payment_allocates, @payment_allocates do |payment_allocate| %>
+  <tr>
+    <td><%= payment_allocate.input :allocate_me, :as => :boolean %></td>
+    <td><%= payment_allocate.object.invoice.id %><%= payment_allocate.input :invoice_id, :as => :hidden %></td>
+    <td><%= payment_allocate.object.invoice.tdate %></td>
+    <td><%= payment_allocate.object.invoice.subject %></td>
+    <td><%= payment_allocate.object.invoice.total %></td>
+    <td><%= payment_allocate.object.invoice.balance %></td>
+    <td><%= payment_allocate.input :amount %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>

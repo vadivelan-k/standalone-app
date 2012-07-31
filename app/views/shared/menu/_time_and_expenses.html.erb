@@ -1,0 +1,6 @@
+<div id="top_tabs">
+  <ul class="navigation">
+    <li<%= raw ' class="active"' if active == :time %>><%= link_to 'Time', firm_time_entries_path(current_firm) %></li>
+    <li<%= raw ' class="active"' if active == :expense %>><%= link_to 'Expense', firm_expense_entries_path(current_firm) %></li>
+  </ul>
+</div>
