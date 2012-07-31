@@ -1,0 +1,17 @@
+<div class="clsFloatRight wd510">
+		<ul>
+				<% if user_signed_in? %>
+						<li><%= link_to('Dash', home_path)%></li>
+				<% else %>
+						<li><a href="#">Sign Up </a></li> 
+				<% end %>
+				<li><a href="#">Pricing</a></li> 
+				<li><a href="#">Tour</a></li> 
+				<% if user_signed_in? %>
+						<li><%= link_to('Logout', destroy_user_session_path)%></li>
+				<% else %>
+						<li><%= link_to('Login', new_user_session_path)%></li>
+				<%end%>
+		</ul> 
+		<div class="clear"></div>
+</div>

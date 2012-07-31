@@ -1,0 +1,43 @@
+  <%#
+    
+    Login/Logout header
+    
+  %>
+  <div id="top_header">&nbsp;
+    <ul class="navigation">
+      <li><%= link_to('Home', root_path)%></li>
+      <% if user_signed_in? %>
+      <li><%= link_to('Dashboard', home_path)%></li>
+      <li>(<%=current_user.email%>)<%= link_to('Logout', destroy_user_session_path)%></li>
+      <% else %>
+      <li><%= link_to('Login', new_user_session_path)%></li>
+      <%end%>
+    </ul>
+  </div>
+  <div class="clearboth"></div>
+    
+  <%#
+    
+    Firm menu
+    
+  %>
+  <%= render 'shared/menu/firm' if current_firm %>
+
+  <!--
+  <div id="breadcrumbs">
+    You are at: <%= render_breadcrumbs %>
+  </div>
+  -->
+
+  <%# flash message %>
+  <% unless flash.empty? %>
+  <div id="flash_container" class="clear">
+    <% flash.each do |key, value| %>
+      <div class="flash <%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+  <% end %>
+  
+		<%= yield %>
+
+  <%= debug(params) %>

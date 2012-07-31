@@ -2,55 +2,33 @@
 <html>
 <head>
   <title>Billz</title>
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag    "application", :debug => true %>
   <!--[if IE 6]><%= stylesheet_link_tag 'ie6' %><![endif]-->
   <!--[if IE 7]><%= stylesheet_link_tag 'ie7' %><![endif]-->
-  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "application", :debug => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%#
-    
-    Login/Logout header
-    
-  %>
-  <div id="top_header">&nbsp;
-    <ul class="navigation">
-      <li><%= link_to('Home', root_path)%></li>
-      <% if user_signed_in? %>
-      <li><%= link_to('Dashboard', home_path)%></li>
-      <li>(<%=current_user.email%>)<%= link_to('Logout', destroy_user_session_path)%></li>
-      <% else %>
-      <li><%= link_to('Login', new_user_session_path)%></li>
-      <%end%>
-    </ul>
-  </div>
-  <div class="clearboth"></div>
-    
-  <%#
-    
-    Firm menu
-    
-  %>
-  <%= render 'shared/menu/firm' if current_firm %>
-
-  <!--
-  <div id="breadcrumbs">
-    You are at: <%= render_breadcrumbs %>
-  </div>
-  -->
-
-  <%# flash message %>
-  <% unless flash.empty? %>
-  <div id="flash_container" class="clear">
-    <% flash.each do |key, value| %>
-      <div class="flash <%= key %>"><%= value %></div>
-    <% end %>
-  </div>
-  <% end %>
-  
-<%= yield %>
-
-  <%= debug(params) %>
+		<div class="container">
+				<div id="menu">
+						<div class="lftcurve">
+								<div class="rtcurve">
+										<div class="clsFloatLeft"><%= link_to image_tag('logo.jpg', width: "412", height: "78", border: "0", style: "margin-top:-12px;"), root_path %></a></div>
+										<%= render :partial => "shared/header_links" %>
+								</div>
+						</div>
+				</div>
+				<div class="clear"></div>
+				<div class="brdrBox1">
+						<span class="brdr1ct"><span class="brdr1cl"></span></span>
+						<%= render 'shared/menu/firm' if current_firm %>
+						
+						<%= yield %>
+						
+						<%= render :partial => 'shared/footer' %>
+						<span class="brdr1bl"><span class="brdr1br"></span></span>
+				</div>
+		</div> 
+		<%= debug(params) %>
 </body>
 </html>

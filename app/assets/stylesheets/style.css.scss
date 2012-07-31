@@ -1,0 +1,142 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ margin:0; padding:0; background:#f7f1a2 url(/assets/glow.jpg) no-repeat center center; font-size:14px; font-family: Georgia, "Times New Roman", Times, serif; color:#000;}
+/*.glow{ background:url(/assets/glow.jpg) top center no-repeat; width:100%; height:100%;}*/
+textfield, select {width:120px;}
+.wid{width:75px!important;}
+.fieldw{ width:220px !important;}
+.container{ width:970px; margin:36px auto;}
+#menu{ background:url(/assets/menu_bg.jpg) repeat-x; height:55px; color:#fff;}
+
+.lftcurve{ background:url(/assets/menu_lt_bg.png) top left no-repeat; padding-left:15px; height:55px;}
+.rtcurve{ background:url(/assets/menu_rt_bg.jpg) top right no-repeat; padding-right:15px; height:55px;}
+#zebra td{ border-right:#000 solid 1px;}
+#zebrano td{ border-right: none;}
+.topbdr{ border-top:#000 solid 1px;}
+.rtbdr{ border-right:none !important;}
+.botbdr{ border-bottom:#000 solid 1px;}
+.dash{ background:url(/assets/dash.png) bottom left no-repeat; padding-left:25px;}
+.enter{ background:url(/assets/enter.png) no-repeat left top; margin-top:8px; width:966px; height:486px;}
+.btenter{ float:right; margin:350px 70px 0px 0;}
+#menu ul{ padding:0; margin:0;}
+#menu li{ padding:18px 30px; margin-top:0px; list-style:none; float:left; background:url(/assets/separator.jpg) left top no-repeat;}
+#menu li a{ color:#fff; text-decoration:none; font-size:16px; font-weight:bold; text-transform:uppercase; }
+
+#menusmall{ height:43px; color:#fff;}
+#menusmall ul{ padding:0; margin:0;}
+#menusmall li{ margin-top:0px; list-style:none; float:left; background:url(/assets/small-menu.jpg) repeat-x left top; border-radius:10px;padding:8px 13px; margin:0 10px;}
+#menusmall li a{ color:#fff; text-decoration:none; font-size:16px; font-weight:bold; text-transform:uppercase; }
+
+
+/*#menusmall1{ height:24px; color:#fff; width:660px; margin:0 auto;}
+#menusmall1 ul{ padding:0; margin:0;}
+#menusmall1 li{ margin-top:0px; list-style:none; float:left; background:url(/assets/small-menu1.jpg) repeat-x left top; border-radius:10px; border-bottom-left-radius:0; border-bottom-right-radius:0; padding:8px 8px; margin:0 3px;}
+#menusmall1 li a{ color:#fff; text-decoration:none; font-size:16px; font-weight:bold; text-transform:uppercase; }*/
+
+#smallmenu {
+	font-size:16px; line-height:normal; width:650px; margin:0 auto;/*margin between menu and rest of page*/
+	overflow:hidden;}
+#smallmenu ul {
+	margin:0;padding:10px 10px 0 0px;list-style:none;}
+#smallmenu li {
+	display:inline;	margin:0;padding:0; float:left;	}
+#smallmenu a {
+	float:left;	background:url("/assets/leftb.png") no-repeat left top; margin:0; padding:0 0 0 13px;text-decoration:none;  text-transform:uppercase;}
+#smallmenu a span {	float:left;	display:block;	background:url("/assets/rightb.png") no-repeat right top;	padding:6px 13px 6px 0px;
+	margin-right:2px; color:#FFF;}
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#smallmenu a span {float:none;}
+/* End IE5-Mac hack */
+#smallmenu a:hover span {}
+#smallmenu a:hover {background-position:0% -39px;}
+#smallmenu a:hover span {background-position:100% -39px;}
+#smallmenu a:active {background-position:0% -39px;}
+#smallmenu a:active span {background-position:100% -39px;}
+
+#smallmenu a.smallmenuactive:link {float:left;	background:url("/assets/leftb.png") no-repeat 0% -39px; margin:0; padding:0 0 0 13px;text-decoration:none;  text-transform:uppercase;}
+#smallmenu a.smallmenuactive:link span {background-position:100% -39px;}
+
+.tcontent{font-size:14px; font-family: Georgia, "Times New Roman", Times, serif; color:#000; font-weight:bold; text-transform:uppercase;}
+.tcontent h1{ font-size:18px; padding:0; margin:0;}
+/*container that holds a row of aero buttons*/
+.aerobuttonmenu{ 
+margin:8px 20px 0 25px;}
+* html .aerobuttonmenu{ /*IE6 and below hack. Set explicit strip width*/
+width: 100%;}
+.aerobuttonmenu a.aero{ /*aero button CSS*/
+background: transparent url('/assets/aeroleft.png') no-repeat top left;
+display: block;float: left;font-size:15px;text-transform:uppercase;
+line-height: 33px; /* This value + 8px should equal height of button background (default is 31px) */
+height: 43px; /* Height of button background height */
+padding-left: 14px; /* Width of left menu image */
+text-decoration: none;margin-right: 21px; /*spacing between buttons*/}
+.aerobuttonmenu a.aero:link, .aerobuttonmenu a.aero:visited, .aerobuttonmenu a:active{
+color: white; /*button text color*/}
+.aerobuttonmenu a.aero span{
+background: transparent url('/assets/aeroright.png') no-repeat top right;display: block;padding: 4px 15px 6px 0; /*Set 10px here to match value of 'padding-left' value above*/}
+.aerobuttonmenu a.aero:hover{ /* Hover state CSS */
+background: transparent url('/assets/haeroleft.png') no-repeat top left;display: block;float: left;
+font-size:15px; text-transform:uppercase;
+line-height: 33px; /* This value + 8px should equal height of button background (default is 31px) */
+height: 43px; /* Height of button background height */
+padding-left: 14px; /* Width of left menu image */
+text-decoration: none;margin-right: 21px; /*spacing between buttons*/}
+.aerobuttonmenu a.aero:hover span{ /* Hover state CSS (for text) */
+background: transparent url('/assets/haeroright.png') no-repeat top right;display: block;padding: 4px 15px 6px 0; /*Set 10px here to match value of 'padding-left' value above*/}
+
+
+.aerobuttonmenu a.aeroactive{ /* Hover state CSS */
+background: transparent url('/assets/haeroleft.png') no-repeat top left;display: block;float: left;
+font-size:15px; text-transform:uppercase;
+line-height: 33px; /* This value + 8px should equal height of button background (default is 31px) */
+height: 43px; /* Height of button background height */
+padding-left: 14px; /* Width of left menu image */
+color:#fff;
+text-decoration: none;margin-right: 21px; /*spacing between buttons*/}
+.aerobuttonmenu a.aeroactive span{ /* Hover state CSS (for text) */
+background: transparent url('/assets/haeroright.png') no-repeat top right;display: block;padding: 4px 15px 6px 0; /*Set 10px here to match value of 'padding-left' value above*/}
+
+.mar10{ margin:10px 0; text-align:center;}
+.wd510{ width:510px;}
+.clear{ clear:both; height:1px; overflow:hidden; margin:0; padding:0;}
+.clsFloatLeft{ float:left;}
+.clsFloatRight{ float: right;}
+.save{ background:url(/assets/save.png) no-repeat; width:125px; height:35px; text-indent:-999px; cursor:pointer; border:none;}
+.save1{ background:url(/assets/save1.png) no-repeat; width:112px; height:32px; text-indent:-999px; cursor:pointer; border:none;}
+.cancel{ background:url(/assets/cancel.png) no-repeat; width:112px; height:32px; text-indent:-999px; cursor:pointer; border:none;}
+.view{ background:url(/assets/view.png) no-repeat; width:111px; height:31px; text-indent:-999px; cursor:pointer; border:none;}
+.view1{ background:url(/assets/view.png) no-repeat; width:138px; height:39px; text-indent:-999px; cursor:pointer; border:none;}
+.viewcodes{ background:url(/assets/viewcodes.png) no-repeat; width:111px; height:31px; text-indent:-999px; cursor:pointer; border:none;}
+.spellcheck{ background:url(/assets/spellcheck.png) no-repeat; width:111px; height:31px; text-indent:-999px; cursor:pointer; border:none;}
+.applycodes{ background:url(/assets/applycodes.png) no-repeat; width:112px; height:32px; text-indent:-999px; cursor:pointer; border:none;}
+.outercurve{ border:#bfbc89 solid 1px; margin:15px 0; background:#fff; border-radius:10px; padding:15px;}
+.inner730{ width:730px; margin:-1px auto 10px auto; border:#829fa3 solid 1px; border-radius:10px; padding:10px;}
+.pp a{ padding:0 15px; font-weight:bold; text-transform:uppercase; font-size:16px; color:#000; text-decoration:none;}
+.pp a:hover{ text-decoration:underline;}
+#footer a{ color:#000; text-decoration:none;}
+#footer a:hover{ text-decoration:underline;}
+
+.brdrBox1{background:none repeat scroll 0 0 #fff; border:1px solid #c1be83; margin:10px auto; padding:0; }
+.brdrBox1 .brdrBox1Content{background:none repeat scroll 0 0 transparent; padding:7px 12px;}
+.brdr1ct{background:url("") no-repeat scroll right top transparent; display:block; font-size:0; height:20px; line-height:20px; margin:0; position:relative; right:-1px; top:-1px; width:100%;}
+.brdr1ct .brdr1cl{background:url("") no-repeat scroll left top transparent; display:block; font-size:0; height:20px; left:-2px; line-height:20px; margin:0; position:relative; width:20px;}
+.brdr1bl{background:url("") no-repeat scroll left bottom transparent; bottom:-1px; display:block; font-size:0; height:20px; left:-1px; line-height:20px; margin:0; position:relative; width:100%;}
+.brdr1br{background:url("") no-repeat scroll right bottom transparent; bottom:0; clear:both; display:block; font-size:0; height:20px; line-height:20px; margin:0; position:relative; right:-2px; width:100%;}
+.brdrBox1 .brdr1ct{background:url("/assets/righttop.jpg") no-repeat scroll right top transparent; display:block; font-size:0; height:20px; line-height:20px; margin:0; position:relative; right:-1px; top:-1px; width:100%;}
+.brdrBox1 .brdr1ct .brdr1cl{background-image:url("/assets/lefttop.jpg");}
+.brdrBox1 .brdr1bl{background-image:url("/assets/leftbottom.jpg");}
+.brdrBox1 .brdr1bl .brdr1br{background-image:url("/assets/rightbottom.jpg");}
+.clearfloats {clear:both;display:block;font-size:1px;height:1px;line-height:0;}
+.name{width:730px; padding:0; margin:0 auto; }
+
+.brdrBox2{background:none repeat scroll 0 0 #fff; border:1px solid #839ea4; margin:-1px auto; width:730px; padding:0; }
+.brdrBox2 .brdrBox2Content{background:none repeat scroll 0 0 transparent; padding:0px 12px;}
+.brdr2ct{background:url("") no-repeat scroll right top transparent; display:block; font-size:0; height:20px; line-height:20px; margin:0; position:relative; right:-1px; top:-1px; width:100%;}
+.brdr2ct .brdr2cl{background:url("") no-repeat scroll left top transparent; display:block; font-size:0; height:20px; left:-2px; line-height:20px; margin:0; position:relative; width:20px;}
+.brdr2bl{background:url("") no-repeat scroll left bottom transparent; bottom:-1px; display:block; font-size:0; height:20px; left:-1px; line-height:20px; margin:0; position:relative; width:100%;}
+.brdr2br{background:url("") no-repeat scroll right bottom transparent; bottom:0; clear:both; display:block; font-size:0; height:20px; line-height:20px; margin:0; position:relative; right:-2px; width:100%;}
+.brdrBox2 .brdr2ct{background:url("/assets/righttopg.jpg") no-repeat scroll right top transparent; display:block; font-size:0; height:20px; line-height:20px; margin:0; position:relative; right:-1px; top:-1px; width:100%;}
+.brdrBox2 .brdr2ct .brdr2cl{background-image:url("/assets/lefttopg.jpg");}
+.brdrBox2 .brdr2bl{background-image:url("/assets/leftbottomg.jpg");}
+.brdrBox2 .brdr2bl .brdr2br{background-image:url("/assets/rightbottomg.jpg");}
