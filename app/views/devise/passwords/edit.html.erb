@@ -1,16 +1,38 @@
-<h2>Change your password</h2>
+<div class="clear"></div>
+<div class="mar10"><img src="/assets/shade.jpg" width="934" height="15" /></div>
+
+
+<div class="clear"></div>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <p><%= f.label :password, "New password" %><br />
-  <%= f.password_field :password %></p>
-
-  <p><%= f.label :password_confirmation, "Confirm new password" %><br />
-  <%= f.password_field :password_confirmation %></p>
-
-  <p><%= f.submit "Change my password" %></p>
-<% end %>
-
-<%= render :partial => "devise/shared/links" %>
+  
+  <table class="tcontent" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center" valign="top"><h2>Change your password</h2><%= devise_error_messages! %>
+  <%= f.hidden_field :reset_password_token %><table width="60%" border="0" cellspacing="0" cellpadding="8">
+      <tr>
+        <td width="16%" align="left" valign="top"><%= f.label :password, "New password" %> </td>
+        <td width="20%" align="left" valign="top"><%= f.password_field :password %></td>
+      </tr>
+			
+			<tr>
+			  <td align="left" valign="top"><%= f.label :password_confirmation, "Confirm new password" %></td>
+				<td align="left" valign="top"><%= f.password_field :password_confirmation %></td>          
+			</tr>
+			
+			<tr>
+			  <td align="left" valign="top">&nbsp;</td>
+				<td align="left" valign="top"><%= f.submit "Change my password" %></td>          
+			</tr>
+		</td></tr>		
+    </table>
+	</td>	
+	</tr>
+	</table>
+ <%end%>
+ 
+ <%= render :partial => "devise/shared/links" %>
+ 
+<div class="clear"></div>
+<div class="mar10"><img src="/assets/shade.jpg" width="934" height="15" /></div>
+<div class="clear"></div>

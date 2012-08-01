@@ -1,17 +1,48 @@
-<h2>Sign in</h2>
+<div class="clear"></div>
+<div class="mar10"><img src="/assets/shade.jpg" width="934" height="15" /></div>
+
+
+<div class="clear"></div>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <p><%= f.label :email %><br />
-  <%= f.email_field :email %></p>
+  
+  <table class="tcontent" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center" valign="top"><h2>Sign in</h2><table width="60%" border="0" cellspacing="0" cellpadding="8">
+      <tr>
+        <td width="16%" align="left" valign="top"><%= f.label :email %> </td>
+        <td width="20%" align="left" valign="top"><%= f.email_field :email %></td>
+      </tr>
+			
+			<tr>
+			  <td align="left" valign="top"><%= f.label :password %></td>
+				<td align="left" valign="top"> <%= f.password_field :password %></td>          
+			</tr>
+			
+			<tr>
+			  <td align="left" valign="top">&nbsp;</td>
+				<td align="left" valign="top">
+				  <% if devise_mapping.rememberable? -%>
+            <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+           <% end -%>
+				 </td>          
+			</tr>			
 
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
+			<tr>
+			  <td align="left" valign="top">&nbsp;</td>
+				<td align="left" valign="top"><%= f.submit "Sign in" %></td>          
+			</tr>
+		</td></tr>		
+    </table>
+	</td>	
+	</tr>
+	</table>
+ <%end%>
+ 
+ <%= render :partial => "devise/shared/links" %>
+ 
+<div class="clear"></div>
+<div class="mar10"><img src="/assets/shade.jpg" width="934" height="15" /></div>
+<div class="clear"></div>
 
-  <% if devise_mapping.rememberable? -%>
-    <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
-  <% end -%>
 
-  <p><%= f.submit "Sign in" %></p>
-<% end %>
-
-<%= render :partial => "devise/shared/links" %>
